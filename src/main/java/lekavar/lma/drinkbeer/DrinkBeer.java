@@ -21,6 +21,7 @@ public class DrinkBeer {
         SoundEventRegistry.SOUNDS.register(modEventBus);
         MobEffectRegistry.STATUS_EFFECTS.register(modEventBus);
         ContainerTypeRegistry.CONTAINERS.register(modEventBus);
+        RecipeRegistry.RECIPE_TYPES.register(modEventBus);
         RecipeRegistry.RECIPE_SERIALIZERS.register(modEventBus);
     }
 }
