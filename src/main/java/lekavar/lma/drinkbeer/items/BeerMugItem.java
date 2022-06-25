@@ -6,7 +6,7 @@ import lekavar.lma.drinkbeer.utils.ModCreativeTab;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
+//import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
@@ -31,6 +31,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class BeerMugItem extends BlockItem {
@@ -75,10 +76,10 @@ public class BeerMugItem extends BlockItem {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         String name = this.asItem().toString();
         if (hasEffectNoticeTooltip()) {
-            tooltip.add(new TranslatableComponent("item.drinkbeer." + name + ".tooltip").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
+            tooltip.add(Component.translatable("item.drinkbeer." + name + ".tooltip").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)));
         }
         String hunger = String.valueOf(stack.getItem().getFoodProperties().getNutrition());
-        tooltip.add(new TranslatableComponent("drinkbeer.restores_hunger").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)).append(hunger));
+        tooltip.add(Component.translatable("drinkbeer.restores_hunger").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BLUE)).append(hunger));
     }
 
     private boolean hasEffectNoticeTooltip() {
@@ -120,7 +121,8 @@ public class BeerMugItem extends BlockItem {
     }
 
     private SoundEvent getRandomNightHowlSound() {
-        List<SoundEvent> available = ForgeRegistries.SOUND_EVENTS.getValues().stream().filter(soundEvent -> soundEvent.getRegistryName().toString().contains("night_howl_drinking_effect")).collect(Collectors.toList());
+        List<SoundEvent> available = ForgeRegistries.SOUND_EVENTS.getValues().stream().filter(soundEvent -> ForgeRegistries.SOUND_EVENTS.getKey(soundEvent).toString().contains("night_howl_drinking_effect")).collect(Collectors.toList());
         return available.get(new Random().nextInt(available.size()));
     }
+
 }
