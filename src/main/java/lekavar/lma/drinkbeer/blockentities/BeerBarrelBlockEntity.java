@@ -10,7 +10,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+//import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
@@ -206,12 +206,12 @@ public class BeerBarrelBlockEntity extends BaseContainerBlockEntity implements I
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("block.drinkbeer.beer_barrel");
+        return Component.translatable("block.drinkbeer.beer_barrel");
     }
 
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("block.drinkbeer.beer_barrel");
+        return Component.translatable("block.drinkbeer.beer_barrel");
     }
 
     @Nullable
