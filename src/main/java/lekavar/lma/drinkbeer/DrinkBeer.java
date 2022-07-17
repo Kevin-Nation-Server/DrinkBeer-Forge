@@ -1,9 +1,11 @@
 package lekavar.lma.drinkbeer;
 
+import lekavar.lma.drinkbeer.client.DrinkBeerClient;
+import lekavar.lma.drinkbeer.networking.NetWorking;
 import lekavar.lma.drinkbeer.registries.*;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.eventbus.api.IEventBus;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("drinkbeer")
@@ -12,16 +14,22 @@ public class DrinkBeer {
     // Directly reference a log4j logger.
     // private static final Logger LOGGER = LogManager.getLogger();
 
-    public DrinkBeer() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public static final String MOD_ID = "drinkbeer";
 
-        ItemRegistry.ITEMS.register(modEventBus);
-        BlockRegistry.BLOCKS.register(modEventBus);
-        BlockEntityRegistry.BLOKC_ENTITIES.register(modEventBus);
-        SoundEventRegistry.SOUNDS.register(modEventBus);
-        MobEffectRegistry.STATUS_EFFECTS.register(modEventBus);
-        ContainerTypeRegistry.CONTAINERS.register(modEventBus);
-        RecipeRegistry.RECIPE_TYPES.register(modEventBus);
-        RecipeRegistry.RECIPE_SERIALIZERS.register(modEventBus);
+    public DrinkBeer() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        MobEffectRegistry.STATUS_EFFECTS.register(bus);
+        ItemRegistry.ITEMS.register(bus);
+        BlockRegistry.BLOCKS.register(bus);
+        BlockEntityRegistry.BLOKC_ENTITIES.register(bus);
+        SoundEventRegistry.SOUNDS.register(bus);
+        ContainerTypeRegistry.CONTAINERS.register(bus);
+        RecipeRegistry.RECIPE_TYPES.register(bus);
+        RecipeRegistry.RECIPE_SERIALIZERS.register(bus);
+        ParticleRegistry.PARTICLES.register(bus);
+
+        bus.addListener(DrinkBeerClient::onInitializeClient);
+        bus.addListener(NetWorking::init);
     }
 }
