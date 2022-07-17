@@ -22,7 +22,7 @@ public class DrinkBeer {
         MobEffectRegistry.STATUS_EFFECTS.register(bus);
         ItemRegistry.ITEMS.register(bus);
         BlockRegistry.BLOCKS.register(bus);
-        BlockEntityRegistry.BLOKC_ENTITIES.register(bus);
+        BlockEntityRegistry.BLOCK_ENTITIES.register(bus);
         SoundEventRegistry.SOUNDS.register(bus);
         ContainerTypeRegistry.CONTAINERS.register(bus);
         RecipeRegistry.RECIPE_TYPES.register(bus);
